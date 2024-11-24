@@ -75,5 +75,5 @@ static const struct arg args[] = {
 	{ battery_perc, " %3s%%", "BAT0"},
 	{ battery_state, " %s", "BAT0"},
 	{ separator, "    ", NULL},
-	{ wifi_perc, "%s", "wlp3s0"},
+	{ wifi_perc, "%s ", "wlp3s0"},
 };
