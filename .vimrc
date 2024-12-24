@@ -29,30 +29,31 @@ call plug#begin('/home/vad/.vim/bundle')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
+ 
 Plug 'neovimhaskell/haskell-vim'
 Plug 'dense-analysis/ale'
-Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'scrooloose/nerdtree-project-plugin'
+Plug 'dominikduda/vim_current_word'
 call plug#end() 
 
 let g:airline_powerline_fonts = 1
 let g:Powerline_symbols='unicode'
 let g:airline_section_z = "Ln:%l/%L Col:%c"
-
 nnoremap <C-t> :NERDTreeToggle<CR>
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
-nnoremap <silent> K :call ShowDocumentation()<CR>
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+hi CocFloating ctermbg=Black
+hi CocMenuSel ctermbg=DarkGrey
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
@@ -61,3 +62,5 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+let g:coc_global_extensions = ['coc-css', 'coc-clangd', 'coc-html', 'coc-json', 'coc-lightbulb', 'coc-sh']
