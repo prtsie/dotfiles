@@ -2,12 +2,13 @@ filetype plugin indent on
 set nocompatible 
 set encoding=utf8
 set relativenumber " Относительные номера строк
+set incsearch
+set hlsearch " Подсветка всех найденных подстрок
 set expandtab " Пробелы вместо табов
 set smarttab " То же?
-set tabstop=4 " Количество пробелов в табе
-set softtabstop=4 " Количество пробелов в табе
-set shiftwidth=4 " То же?
-set hlsearch " Подсветка всех найденных подстрок
+set tabstop=2 " Количество пробелов в табе
+set softtabstop=2 " Количество пробелов в табе
+set shiftwidth=2 " То же?
 set wrap linebreak nolist " Перенос по словам
 set scrolloff=5 " Между курсором и концом окна всегда 5 строк
 set ignorecase
@@ -36,6 +37,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'dominikduda/vim_current_word'
+Plug 'morhetz/gruvbox'
 call plug#end() 
 
 let g:airline_powerline_fonts = 1
@@ -46,14 +48,28 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-hi CocFloating ctermbg=Black
-hi CocMenuSel ctermbg=DarkGrey
+" hi CocFloating ctermbg=Black
+" hi CocMenuSel ctermbg=DarkGrey
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
 inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+
+if (has("termguicolors"))
+    set termguicolors
+endif
+let g:gruvbox_italic=1
+set background=dark
+autocmd vimenter * ++nested colorscheme gruvbox
+
+nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
