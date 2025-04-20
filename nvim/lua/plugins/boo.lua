@@ -1,0 +1,4 @@
+return {
+	'LukasPietzschmann/boo.nvim',
+}
+
