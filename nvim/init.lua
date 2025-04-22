@@ -24,3 +24,15 @@ opt.relativenumber = true
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 opt.foldenable = false
+
+vim.diagnostic.config({
+	virtual_text = { prefix = "●"},
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ", 
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.HINT] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+	},
+})

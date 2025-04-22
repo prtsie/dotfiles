@@ -20,8 +20,6 @@ vim.keymap.set("n", "<C-e>", nvimTreeFocusOrToggle, {
 	desc = "Toggle NvimTree focus"
 })
 
-local boo = require('boo')
-vim.keymap.set('n', '<C-d>', boo.boo, { desc = 'Open boo pop-up' })
 local notify_original = vim.notify
 vim.notify = function(msg, ...)
 	if
@@ -40,3 +38,17 @@ end
 vim.keymap.set("n", "<leader>ca", function()
 	require("tiny-code-action").code_action()
 end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Floating diagnostic" })
+vim.keymap.set("n", "<leader>dh", vim.diagnostic.hide, { desc = "Hide diagnostic" })
+vim.keymap.set("n", "<leader>ds", vim.diagnostic.show, { desc = "Show diagnostic" })
+
+vim.keymap.set('n', 'U', vim.cmd.UndotreeToggle, { desc = 'Toggle undo-tree' })
+
+vim.keymap.set('i', '<C-c>', '<Esc>')
+
+vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv")
+
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
