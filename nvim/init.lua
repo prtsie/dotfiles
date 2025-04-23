@@ -5,6 +5,12 @@ require('config.keymaps')
 local opt = vim.opt
 local g = vim.g
 
+vim.filetype.add({
+  extension = {
+    ['http'] = 'http',
+  },
+})
+
 vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -13,8 +19,9 @@ opt.smartcase = true
 opt.showmatch = true
 opt.incsearch = true
 
-opt.shiftwidth = 2
-opt.tabstop = 2
+opt.shiftwidth = 4
+opt.tabstop = 4
+opt.expandtab = true
 
 opt.splitright = true
 opt.clipboard = 'unnamedplus'

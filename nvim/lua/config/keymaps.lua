@@ -52,3 +52,6 @@ vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
+
+vim.keymap.set('n', '<leader>rr', ':Rest run<CR>')
+vim.keymap.set('n', '<leader>rl', ':Rest last<CR>')
