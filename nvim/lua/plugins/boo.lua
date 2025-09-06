@@ -1,4 +1,0 @@
-return {
-	'LukasPietzschmann/boo.nvim',
-}
-

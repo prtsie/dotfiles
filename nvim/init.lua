@@ -1,36 +1,42 @@
-require('config.lazy')
-require('config.lsp')
-require('config.keymaps')
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.showmatch = true
 
-local opt = vim.opt
-local g = vim.g
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.smartindent = true
 
-vim.filetype.add({
-  extension = {
-    ['http'] = 'http',
-  },
-})
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
-vim.g.loaded_netrw       = 1
-vim.g.loaded_netrwPlugin = 1
+vim.o.clipboard = "unnamedplus"
 
-opt.ignorecase = true
-opt.smartcase = true
-opt.showmatch = true
-opt.incsearch = true
+vim.wo.relativenumber = true
 
-opt.shiftwidth = 4
-opt.tabstop = 4
-opt.expandtab = true
+require("config.lazy")
 
-opt.splitright = true
-opt.clipboard = 'unnamedplus'
-opt.completeopt = 'menuone,noselect'
-opt.relativenumber = true
+vim.keymap.set({ "n", "x" }, "<leader>ca", function()
+	require("tiny-code-action").code_action()
+end, { noremap = true, silent = true })
 
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-opt.foldenable = false
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
+
+vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv")
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+
+vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Floating diagnostic" })
+vim.keymap.set("n", "<leader>dh", vim.diagnostic.hide, { desc = "Hide diagnostic" })
+vim.keymap.set("n", "<leader>ds", vim.diagnostic.show, { desc = "Show diagnostic" })
+
+vim.keymap.set('n', 'U', vim.cmd.UndotreeToggle)
+vim.g.undotree_SetFocusWhenToggle = 1
+vim.opt.undofile = true
 
 vim.diagnostic.config({
 	virtual_text = { prefix = "●"},
