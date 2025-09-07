@@ -2,8 +2,8 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.showmatch = true
 
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.opt.smartindent = true
 
 vim.opt.splitright = true
@@ -37,6 +37,23 @@ vim.keymap.set("n", "<leader>ds", vim.diagnostic.show, { desc = "Show diagnostic
 vim.keymap.set('n', 'U', vim.cmd.UndotreeToggle)
 vim.g.undotree_SetFocusWhenToggle = 1
 vim.opt.undofile = true
+
+local nvimTreeFocusOrToggle = function ()
+	local nvimTree=require("nvim-tree.api")
+	local currentBuf = vim.api.nvim_get_current_buf()
+	local currentBufFt = vim.api.nvim_get_option_value("filetype", { buf = currentBuf })
+	if currentBufFt == "NvimTree" then
+		nvimTree.tree.toggle()
+	else
+		nvimTree.tree.focus()
+	end
+end
+
+vim.keymap.set("n", "<C-e>", nvimTreeFocusOrToggle, {
+	noremap = true,
+	silent = true,
+	desc = "Toggle NvimTree focus"
+})
 
 vim.diagnostic.config({
 	virtual_text = { prefix = "●"},
