@@ -1,2 +1,4 @@
-window-decoration = false
-focus-follows-mouse = true
+theme = Gruvbox Dark
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
