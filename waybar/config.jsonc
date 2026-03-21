@@ -1,13 +1,10 @@
 [{
     "height": 40,
-    "spacing": 5,
+    "spacing": 5, 
 
     "modules-left": [
         "group/workspaces",
         "mpris"
-    ],
-    "modules-center": [
-        "group/clock"
     ],
     "modules-right": [
         "group/cpuram",
@@ -16,6 +13,7 @@
         "custom/notification"
     ],
 
+
     "custom/openbracket": {
         "format": "[",
         "tooltip": false
@@ -23,7 +21,7 @@
     "custom/closebracket": {
         "format": "]",
         "tooltip": false
-    },
+    },    
     "custom/split": {
       "format": "|",
       "tooltip": false
@@ -73,6 +71,22 @@
         "dynamic-order": ["artist", "title"]
     },
 
+
+    "group/windows": {
+        "orientation":"horizontal",
+        "modules":[
+            "custom/openbracket",
+            "hyprland/window",
+            "custom/closebracket"
+        ]
+    },
+    "hyprland/window": {
+        "format": "{title}", 
+        "max-length": 20,
+        "min-length": 0,
+        "all-outputs": true
+    },
+
     "group/cpuram": {
         "orientation": "horizontal",
         "modules": [
@@ -87,15 +101,25 @@
         "format": "CPU:{usage}%",
         "tooltip": false,
         "interval": 2,
-        "on-click": "ghostty -e btop"
+        "on-click": "ghostty -e btop",
     },
     "memory":{
         "format": "RAM:{}%",
         "tooltip": false,
         "interval": 2,
-        "on-click": "ghostty -e btop"
+        "on-click": "ghostty -e btop",
     },
 
+    "group/brightvol": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/openbracket",
+            "backlight",
+            "custom/split",
+            "wireplumber",
+            "custom/closebracket"
+        ]
+    },
     "wireplumber": {
         "scroll-step": 5,
         "format": "{icon}{volume}%",
@@ -119,6 +143,8 @@
         "orientation": "horizontal",
         "modules": [
             "custom/openbracket",
+            "clock",
+            "custom/split",
             "custom/bluetooth",
             "wireplumber",
             "custom/split",
@@ -127,13 +153,12 @@
         ]
     },
     "hyprland/language": {
-        "format": " {short}"
+        "format": " {short}",
     },
     "clock": {
-        "format": "{:%d %B, %H:%M}",
-        "locale": "ru_RU.UTF-8",
+        "format": "{:%d.%m.%y %R}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "onclick": "kalender"
+        "onclick" : "kalender"
     },
 
     "custom/notification": {
@@ -168,5 +193,10 @@
     "tray": {
         "icon-size": 28,
         "spacing": 10
+    },
+    "custom/notifications": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/notification_center.sh"
     }
 }]
