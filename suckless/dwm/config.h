@@ -62,7 +62,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "ghostty", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 static const char *lock[]  = { "slock", NULL };
 static const char *up_vol[]   = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",   NULL };
 static const char *down_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",   NULL };
@@ -72,19 +72,19 @@ static const char *screenshot_rect[] = { "flameshot", "gui", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_e,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_q,      spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_l,      spawn,          {.v = lock } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ ALTKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
 	{ ALTKEY|ShiftMask,             XK_Tab,    focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_a,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_s,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_w,      zoom,                {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_q,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_Down,   setmfact,       {.f = -0.05} },
+	{ MODKEY|ShiftMask,             XK_Left,   setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_w,      zoom,           {0} },
+	{ MODKEY|ShiftMask,             XK_Up,    view,           {0} },
+	{ ALTKEY,                       XK_F4,     killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
