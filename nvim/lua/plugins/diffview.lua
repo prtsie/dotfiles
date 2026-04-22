@@ -6,4 +6,6 @@ return {
         { '<leader>gc', '<cmd>DiffviewClose<cr>', desc = 'Diffview close' },
         { '<leader>gf', '<cmd>DiffviewFileHistory<cr>', desc = 'Diffview file history' },
     },
+    opts = {
+    },
 }

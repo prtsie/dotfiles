@@ -10,10 +10,6 @@ local map = vim.keymap.set
 map('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
 map('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 
--- Move lines up/down in visual mode
-map('v', '<C-j>', ":m '>+1<CR>gv=gv")
-map('v', '<C-k>', ":m '<-2<CR>gv=gv")
-
 -- NvimTree focus/toggle
 local nvimTreeFocusOrToggle = function()
     local nvimTree = require("nvim-tree.api")
@@ -41,3 +37,21 @@ map("n", "<leader>ds", vim.diagnostic.show, { desc = "Show diagnostic" })
 map({ "n", "x" }, "<C-.>", function()
     require("tiny-code-action").code_action()
 end, { noremap = true, silent = true })
+
+-- Скопировать относительный путь:строка
+vim.keymap.set('n', '<leader>cf', function()
+    local path = vim.fn.expand("%")
+    local line = vim.fn.line(".")
+    local result = path .. ":" .. line
+    vim.fn.setreg('+', result)
+    print("Copied: " .. result)
+end, { desc = 'Copy file path and line' })
+
+-- Скопировать абсолютный путь:строка
+vim.keymap.set('n', '<leader>cF', function()
+    local path = vim.fn.expand("%:p")
+    local line = vim.fn.line(".")
+    local result = path .. ":" .. line
+    vim.fn.setreg('+', result)
+    print("Copied: " .. result)
+end, { desc = 'Copy absolute file path and line' })
